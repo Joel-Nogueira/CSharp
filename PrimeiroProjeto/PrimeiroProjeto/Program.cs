@@ -29,6 +29,22 @@ void ExibirOpcoesDoMenu()
     {
         Console.WriteLine("Você digitou a opção " + opcaoEscolhida);
     }
+
+    switch (opcaoEscolhidaNumerica)
+    {
+        case 1: Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+            break;
+        case 2: Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+            break;
+        case 3: Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+            break;
+        case 4: Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+            break;
+        case -1: Console.WriteLine("Você saiu da aplicação.");
+            break;
+        default: Console.WriteLine("Opção inválida.");
+            break;
+    }
 }
 
 ExibirMensagemDeBoasVindas();
