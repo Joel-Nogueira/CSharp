@@ -25,10 +25,6 @@ void ExibirOpcoesDoMenu()
     Console.Write("\nDigir a sua opção: ");
     string opcaoEscolhida = Console.ReadLine()!;
     int opcaoEscolhidaNumerica = int.Parse(opcaoEscolhida);
-    if (opcaoEscolhidaNumerica == 1)
-    {
-        Console.WriteLine("Você digitou a opção " + opcaoEscolhida);
-    }
 
     switch (opcaoEscolhidaNumerica)
     {
