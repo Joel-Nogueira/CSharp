@@ -43,7 +43,7 @@ void ExibirOpcoesDoMenu()
             AvaliarBanda();
             break;
         case 4:
-            Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+            ExibirMediaDaBanda();
             break;
         case -1:
             Console.WriteLine("Você saiu do Screen Sound.");
@@ -58,6 +58,16 @@ void ExibirMenu()
 {
     ExibirLogo();
     ExibirOpcoesDoMenu();
+}
+
+void ExibirTituloDaOpcao(string titulo)
+{
+    int quantidadeDeLetras = titulo.Length;
+    string asteriscos = string.Empty.PadLeft(quantidadeDeLetras, '*');
+
+    Console.WriteLine(asteriscos);
+    Console.WriteLine(titulo);
+    Console.WriteLine(asteriscos);
 }
 
 void RegistrarBandas()
@@ -94,6 +104,7 @@ void ExibirBandasRegistradas()
     Console.Clear();
     ExibirMenu();
 }
+
 void AvaliarBanda()
 {
     Console.Clear();
@@ -123,14 +134,27 @@ void AvaliarBanda()
     ExibirMenu();
 }
 
-void ExibirTituloDaOpcao(string titulo)
+void ExibirMediaDaBanda()
 {
-    int quantidadeDeLetras = titulo.Length;
-    string asteriscos = string.Empty.PadLeft(quantidadeDeLetras, '*');
+    Console.Clear();
+    ExibirTituloDaOpcao("Média da banda");
+    Console.Write("De qual banda você quer ver a média? ");
+    string banda = Console.ReadLine()!;
+    if (bandas.ContainsKey(banda))
+    {
+        double media = 0;
+        if (bandas[banda].Count > 0)
+            media = bandas[banda].Average();
 
-    Console.WriteLine(asteriscos);
-    Console.WriteLine(titulo);
-    Console.WriteLine(asteriscos);
+        Console.WriteLine($"A média da banda {banda} é {media}.");
+    }
+    else
+    {
+        Console.WriteLine($"Não é possível saber média dessa {banda}, pois ela não foi cadastrada.");
+    }
+    Console.WriteLine("\nDigite qualquer tecla para voltar ao menu.");
+    Console.ReadKey();
+    ExibirOpcoesDoMenu();
 }
 
 ExibirMenu();
