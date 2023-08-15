@@ -22,3 +22,16 @@ queen.AdicionarAlbum(albumDoQueen);
 musica1.ExibirFichaTecnica();
 musica2.ExibirFichaTecnica();
 queen.ExibirDiscografia();
+
+Console.WriteLine();
+Console.WriteLine();
+
+Episodio episodio1 = new Episodio(100, 99, "Nove nove");
+Episodio episodio2 = new Episodio(100, 33, "Trinta e três");
+Episodio episodio3 = new Episodio(100, 88, "Oito oito");
+
+Podcast podcast = new Podcast("Joel", "Podcast do Joel");
+podcast.AdicionarEpisodio(episodio1);
+podcast.AdicionarEpisodio(episodio2);
+podcast.AdicionarEpisodio(episodio3);
+podcast.ExibirDetalhes();
