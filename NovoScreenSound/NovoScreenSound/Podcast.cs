@@ -1,31 +1,28 @@
 ﻿class Podcast
 {
+    private List<Episodio> _episodios = new List<Episodio>();
     public Podcast(string host, string nome)
     {
         Host = host;
         Nome = nome;
-        _totalEpisodios = 0;
     }
-
-    private List<Episodio> _episodios = new List<Episodio>();
 
     public string Host { get; }
     public string Nome { get; }
 
-    public int _totalEpisodios;
+    public int _totalEpisodios => _episodios.Count;
 
     public void AdicionarEpisodio(Episodio episodio)
     {
         _episodios.Add(episodio);
-        _totalEpisodios++;
     }
 
     public void ExibirDetalhes()
     {
         Console.WriteLine($"Host: {Host}, Nome: {Nome}");
         Console.WriteLine("Lista de episódios");
-        _episodios.Sort((e1, e2) => e1.Numero.CompareTo(e2.Numero));
-        foreach (Episodio episodio in _episodios)
+        /*_episodios.Sort((e1, e2) => e1.Numero.CompareTo(e2.Numero));*/
+        foreach (Episodio episodio in _episodios.OrderBy(e => e.Numero))
         {
             Console.WriteLine($"{episodio.Resumo}");
         }
