@@ -1,20 +1,24 @@
-﻿Episodio episodio1 = new Episodio(100, 99, "Nove nove");
-episodio1.AdicionarConvidados("Joel");
-episodio1.AdicionarConvidados("Lu");
-episodio1.AdicionarConvidados("Alan");
+﻿Banda queen = new Banda("Queen");
 
-Episodio episodio2 = new Episodio(100, 33, "Trinta e três");
-episodio2.AdicionarConvidados("Gleryston");
-episodio2.AdicionarConvidados("João");
-episodio2.AdicionarConvidados("Yuri");
+Album albumDoQueen = new Album("A night at the opera");
 
-Episodio episodio3 = new Episodio(100, 88, "Oito oito");
-episodio3.AdicionarConvidados("Raimundo");
-episodio3.AdicionarConvidados("Leonardo");
-episodio3.AdicionarConvidados("Alan");
+Musica musica1 = new Musica(queen, "Love of my life")
+{
+    Duracao = 213,
+    Disponivel = true
+};
 
-Podcast podcast = new Podcast("Joel", "Podcast do Joel");
-podcast.AdicionarEpisodio(episodio1);
-podcast.AdicionarEpisodio(episodio2);
-podcast.AdicionarEpisodio(episodio3);
-podcast.ExibirDetalhes();
+
+Musica musica2 = new Musica(queen, "Bohemian Rhapsody")
+{
+    Duracao = 354,
+    Disponivel = false,
+};
+
+albumDoQueen.AdicionarMusica(musica1);
+albumDoQueen.AdicionarMusica(musica2);
+queen.AdicionarAlbum(albumDoQueen);
+
+musica1.ExibirFichaTecnica();
+musica2.ExibirFichaTecnica();
+queen.ExibirDiscografia();
