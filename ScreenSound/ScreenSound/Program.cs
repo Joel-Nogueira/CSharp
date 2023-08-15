@@ -1,6 +1,18 @@
-﻿Dictionary<string, List<int>> bandasRegistradas = new Dictionary<string, List<int>>();
-bandasRegistradas.Add("Linkin Park", new List<int> { 10, 8, 6 });
-bandasRegistradas.Add("The Beatles", new List<int>());
+﻿using ScreenSound.Modelos;
+
+Banda ira = new Banda("Ira!");
+ira.AdicionarNota(10);
+ira.AdicionarNota(8);
+ira.AdicionarNota(6);
+
+Banda beatles = new Banda("The Beatles");
+beatles.AdicionarNota(6);
+beatles.AdicionarNota(5);
+beatles.AdicionarNota(4);
+
+Dictionary<string, Banda> bandasRegistradas = new Dictionary<string, Banda>();
+bandasRegistradas.Add(ira.Nome, ira);
+bandasRegistradas.Add(beatles.Nome, beatles);
 
 void ExibirLogo()
 {
@@ -79,7 +91,7 @@ void RegistrarBanda()
     ExibirTituloDaOpcao("Registro das bandas");
     Console.Write("Digite o nome da banda que deseja registrar: ");
     string nomeDaBanda = Console.ReadLine()!;
-    bandasRegistradas.Add(nomeDaBanda, new List<int>());
+    bandasRegistradas.Add(nomeDaBanda, new Banda(nomeDaBanda)); ;
     Console.WriteLine($"A banda {nomeDaBanda} foi registrada com sucesso!");
     Thread.Sleep(4000);
     Console.Clear();
@@ -122,7 +134,7 @@ void AvaliarUmaBanda()
     {
         Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
         int nota = int.Parse(Console.ReadLine()!);
-        bandasRegistradas[nomeDaBanda].Add(nota);
+        bandasRegistradas[nomeDaBanda].AdicionarNota(nota);
         Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
         Thread.Sleep(2000);
         Console.Clear();
@@ -147,8 +159,8 @@ void ExibirDetalhes()
     string nomeDaBanda = Console.ReadLine()!;
     if (bandasRegistradas.ContainsKey(nomeDaBanda))
     {
-        List<int> notasDaBanda = bandasRegistradas[nomeDaBanda];
-        Console.WriteLine($"\nA média da banda {nomeDaBanda} é {notasDaBanda.Average()}.");
+        Banda banda = bandasRegistradas[nomeDaBanda];
+        Console.WriteLine($"\nA média da banda {nomeDaBanda} é {banda.Media}.");
         /**
         * ESPAÇO RESERVADO PARA COMPLETAR A FUNÇÃO
         */
