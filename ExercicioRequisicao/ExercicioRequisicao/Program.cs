@@ -10,6 +10,7 @@ using (HttpClient client = new HttpClient())
 
     //LinqFilter.ExibirApenasTodosOsGenerosMusicais(musicas);
     //LinqFilter.ExibirArtistasPorGeneroMusical(musicas, "pop");
-    LinqFilter.ExibirMusicasPorArtista(musicas, "U2");
+    //LinqFilter.ExibirMusicasPorArtista(musicas, "U2");
+    LinqFilter.ExibirMusicasPorAno(musicas, "2000");
     //LinqOrder.OrdenarArtistasPorNome(musicas);
 }

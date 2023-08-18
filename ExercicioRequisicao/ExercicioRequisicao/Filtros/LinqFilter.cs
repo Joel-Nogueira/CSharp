@@ -40,4 +40,14 @@ class LinqFilter
             musica.ExibirInformacoes();
         }
     }
+    
+    public static void ExibirMusicasPorAno(List<Musica> musicas, string ano)
+    {
+        List<Musica> musicasPorAno = musicas.FindAll(m => m.Ano.Equals(ano));
+
+        foreach (Musica musica in musicasPorAno)
+        {
+            musica.ExibirInformacoes();
+        }
+    }
 }
