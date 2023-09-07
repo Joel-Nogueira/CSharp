@@ -1,37 +1,41 @@
-﻿using ExercicioApi.Modelos;
+﻿using AutoMapper;
+using ExercicioApi.Data;
+using ExercicioApi.Data.Dtos;
+using ExercicioApi.Modelos;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace ExercicioApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
 public class MusicaController
-{
-    private static List<Musica>? _musicas;
+{ 
+    private MusicaContext _context;
+    private IMapper _mapper;
+
+    public MusicaController(MusicaContext context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper; 
+    }
 
     [HttpPost]
-    public async void BuscarMusicasNaUrl([FromBody] string url)
+    public void CriarMusica([FromBody] MusicaDto musicaDto)
     {
-        using (HttpClient client = new HttpClient())
-        {
-            string resposta = await client.GetStringAsync(url);
-            _musicas = JsonSerializer.Deserialize<List<Musica>>(resposta);
-        }
+        Musica musica = _mapper.Map<Musica>(musicaDto);
+        _context.Musicas.Add(musica);
+        _context.SaveChanges();
     }
 
     [HttpGet]
-    public List<Musica>? RetornarTodasMusicas()
+    public IEnumerable<Musica> RetornarTodasMusicas()
     {
-        return _musicas;
+        return _context.Musicas;
     }
 
     [HttpGet("ano/{ano}")]
     public IEnumerable<Musica> GetMusicasPorAno(string? ano)
     {
-        if (_musicas == null)
-            return null;
-
-        return _musicas.Where(m => m.Ano.Equals(ano));
+        return _context.Musicas.Where(m => m.Ano.Equals(ano));
     }
 }

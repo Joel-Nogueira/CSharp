@@ -1,9 +1,14 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ExercicioApi.Modelos;
 
 public class Musica
 {
+    [Key]
+    [Required]
+    public int Id { get; set; }
+
     [JsonPropertyName("artist")]
     public string? Artista { get; set; }
 

@@ -1,5 +1,15 @@
+using ExercicioApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("MusicaConnection");
+
+builder.Services.AddDbContext<MusicaContext>(
+    opts => opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+
+builder.Services.
+    AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 // Add services to the container.
 
 builder.Services.AddControllers();
