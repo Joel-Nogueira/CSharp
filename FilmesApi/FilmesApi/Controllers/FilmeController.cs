@@ -4,6 +4,7 @@ using FilmesApi.Data;
 using FilmesApi.Data.Dtos;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
+using System.Collections.Generic;
 
 namespace FilmesApi.Controllers;
 
@@ -34,9 +35,12 @@ public class FilmeController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Filme> RecuperarTodosOsFilmes([FromQuery] int skip = 0, [FromQuery] int take = 10)
+    public IEnumerable<ReadFilmeDto> RecuperarTodosOsFilmes([FromQuery] int skip = 0, [FromQuery] int take = 10)
     {
-        return _context.Filmes.Skip(skip).Take(take);
+        IEnumerable<Filme> filmes = _context.Filmes.Skip(skip).Take(take);
+        List<ReadFilmeDto> filmesDto = _mapper.Map<List<ReadFilmeDto>>(filmes);
+
+        return filmesDto;
     }
 
     [HttpGet("{id}")]
@@ -47,7 +51,9 @@ public class FilmeController : ControllerBase
         if (filme == null) 
             return NotFound();
 
-        return Ok(filme);
+        ReadFilmeDto filmeDto = _mapper.Map<ReadFilmeDto>(filme);
+
+        return Ok(filmeDto);
     }
 
     [HttpPut("{id}")]
@@ -83,6 +89,19 @@ public class FilmeController : ControllerBase
 
         _mapper.Map(filmeParaAtualizar, filme);
 
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeletarFilme(int id)
+    {
+        Filme filme = _context.Filmes.FirstOrDefault(f => f.Id == id);
+
+        if (filme == null) return NotFound();
+
+        _context.Remove(filme);
         _context.SaveChanges();
 
         return NoContent();
