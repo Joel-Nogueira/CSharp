@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FilmesApi.Data.Dtos;
 
-public class ReadCinemaDto
+public class ReadEnderecoDto
 {
     public int Id { get; set; }
-    public string Nome { get; set; }
-
-    public int EnderecoId { get; set; }
+    public string Logradouro { get; set; }
+    public int Numero { get; set; }
 }
